@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-
-	"golang.org/x/oauth2"
 )
 
 type APIClient struct {
@@ -43,16 +41,6 @@ func NewAPIClientWithBasicAuth(username, password, subdomain string) (c *APIClie
 	c = newAPIClient(subdomain, nil)
 	c.username = username
 	c.password = password
-	return
-}
-
-func NewAPIClientWithAuthToken(token, subdomain string) (c *APIClient) {
-	t := &oauth.Transport{
-		Token: &oauth.Token{AccessToken: token},
-	}
-
-	c = newAPIClient(subdomain, t.Client())
-
 	return
 }
 
