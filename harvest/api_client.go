@@ -17,6 +17,7 @@ type APIClient struct {
 	Project *ProjectService
 	Invoice *InvoiceService
 	Account *AccountService
+	Timesheet *TimesheetService
 }
 
 func newAPIClient(subdomain string, httpClient *http.Client) (c *APIClient) {
@@ -34,6 +35,7 @@ func newAPIClient(subdomain string, httpClient *http.Client) (c *APIClient) {
 	c.Project = &ProjectService{Service{c}}
 	c.Invoice = &InvoiceService{Service{c}}
 	c.Account = &AccountService{Service{c}}
+	c.Timesheet = &TimesheetService{Service{c}}
 	return
 }
 
