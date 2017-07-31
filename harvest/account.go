@@ -23,9 +23,9 @@ type Account struct {
 	Person  Person
 }
 
-func (a *AccountService) Find() (err error, account Account) {
+func (a *AccountService) Find() (account Account, err error) {
 	resourceURL := "/account/who_am_i.json"
 	err = a.find(resourceURL, &account)
 
-	return err, account
+	return account, err
 }

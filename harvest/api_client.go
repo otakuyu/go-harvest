@@ -44,7 +44,7 @@ func NewAPIClientWithBasicAuth(username, password, subdomain string, client *htt
 	return
 }
 
-func (c *APIClient) GetJSON(path string) (err error, jsonResponse []byte) {
+func (c *APIClient) GetJSON(path string) (jsonResponse []byte, err error) {
 	resourceURL := fmt.Sprintf("https://%v.harvestapp.com%v", c.subdomain, path)
 	request, err := http.NewRequest("GET", resourceURL, nil)
 	if err != nil {

@@ -36,7 +36,7 @@ type ProjectResponse struct {
 	Project Project
 }
 
-func (c *ProjectService) List() (err error, projects []Project) {
+func (c *ProjectService) List() (projects []Project, err error) {
 	resourceURL := "/projects.json"
 	var projectResponse []ProjectResponse
 	err = c.list(resourceURL, &projectResponse)
@@ -50,7 +50,7 @@ func (c *ProjectService) List() (err error, projects []Project) {
 	return
 }
 
-func (c *ProjectService) Find(projectID int) (err error, project Project) {
+func (c *ProjectService) Find(projectID int) (project Project, err error) {
 	resourceURL := fmt.Sprintf("/projects/%v.json", projectID)
 	var projectResponse ProjectResponse
 	err = c.find(resourceURL, &projectResponse)

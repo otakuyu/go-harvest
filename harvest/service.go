@@ -9,7 +9,7 @@ type Service struct {
 }
 
 func (service Service) find(resourceURL string, unmarshalContainer interface{}) (err error) {
-	err, contents := service.apiClient.GetJSON(resourceURL)
+	contents, err := service.apiClient.GetJSON(resourceURL)
 	if err != nil {
 		return
 	}
@@ -20,7 +20,7 @@ func (service Service) find(resourceURL string, unmarshalContainer interface{}) 
 }
 
 func (service Service) list(resourceURL string, unmarshalContainer interface{}) (err error) {
-	err, contents := service.apiClient.GetJSON(resourceURL)
+	contents, err := service.apiClient.GetJSON(resourceURL)
 	if err != nil {
 		return
 	}
