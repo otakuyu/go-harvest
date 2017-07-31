@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"code.google.com/p/goauth2/oauth"
+	"golang.org/x/oauth2"
 )
 
 type APIClient struct {
