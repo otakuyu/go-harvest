@@ -37,8 +37,8 @@ func newAPIClient(subdomain string, httpClient *http.Client) (c *APIClient) {
 	return
 }
 
-func NewAPIClientWithBasicAuth(username, password, subdomain string) (c *APIClient) {
-	c = newAPIClient(subdomain, nil)
+func NewAPIClientWithBasicAuth(username, password, subdomain string, client *http.Client) (c *APIClient) {
+	c = newAPIClient(subdomain, client)
 	c.username = username
 	c.password = password
 	return
