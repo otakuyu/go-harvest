@@ -30,10 +30,14 @@ type DayEntry struct {
 type TimesheetResponse struct{
 	DayEntries				[]DayEntry			`json:"day_entries"`
 	ForDay					HarvestDate			`json:"for_day"`
+	Projects				[]Project			`json:"projects"`
 }
 
-func (c *TimesheetService) Find() (timesheetResponse TimesheetResponse, err error) {
+func (c *TimesheetService) Find(day string, year string) (timesheetResponse TimesheetResponse, err error) {
 	resourceURL := fmt.Sprintf("/daily.json")
+	if year != "" && day != ""{
+		resourceURL = fmt.Sprintf("/daily/%v/%v.json", day, year)
+	}
 
 	err = c.find(resourceURL, &timesheetResponse)
 	return
