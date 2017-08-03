@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"encoding/json"
+	"errors"
 )
 
 type APIClient struct {
@@ -18,6 +20,10 @@ type APIClient struct {
 	Invoice *InvoiceService
 	Account *AccountService
 	Timesheet *TimesheetService
+}
+
+type ErrorMessage struct {
+	Message string `json:"message"`
 }
 
 func newAPIClient(subdomain string, httpClient *http.Client) (c *APIClient) {
@@ -62,5 +68,16 @@ func (c *APIClient) GetJSON(path string) (jsonResponse []byte, err error) {
 
 	defer resp.Body.Close()
 	jsonResponse, err = ioutil.ReadAll(resp.Body)
+
+	var errorJson ErrorMessage
+	err = json.Unmarshal(jsonResponse, &(errorJson))
+
+	if err != nil{
+		return
+	}
+
+	if errorJson.Message != ""{
+		return jsonResponse, errors.New("Error when calling harvest API: " + errorJson.Message)
+	}
 	return
 }
