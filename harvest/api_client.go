@@ -60,6 +60,8 @@ func (c *APIClient) GetJSON(path string) (jsonResponse []byte, err error) {
 	}
 
 	request.SetBasicAuth(c.username, c.password)
+	request.Header.Set("Content-Type", "application/json")
+	request.Header.Set("Accept", "application/json")
 	resp, err := c.httpClient.Do(request)
 
 	if err != nil {

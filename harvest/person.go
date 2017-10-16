@@ -41,7 +41,7 @@ type PersonResponse struct {
 }
 
 func (c *PersonService) List() (people []Person, err error) {
-	resourceURL := "/people.json"
+	resourceURL := "/people"
 	var personResponse []PersonResponse
 	err = c.list(resourceURL, &personResponse)
 	if err != nil {
@@ -55,7 +55,15 @@ func (c *PersonService) List() (people []Person, err error) {
 }
 
 func (c *PersonService) Find(personID int) (person Person, err error) {
-	resourceURL := fmt.Sprintf("/people/%v.json", personID)
+	resourceURL := fmt.Sprintf("/people/%v", personID)
+	var personResponse PersonResponse
+	err = c.find(resourceURL, &personResponse)
+	person = personResponse.Person
+	return
+}
+
+func (c *PersonService) FindByUserName(username string)(person Person, err error){
+	resourceURL := fmt.Sprintf("/people/%v", username)
 	var personResponse PersonResponse
 	err = c.find(resourceURL, &personResponse)
 	person = personResponse.Person
